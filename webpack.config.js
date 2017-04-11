@@ -1,10 +1,10 @@
 var path = require('path');
 
 var DEST_DIR = path.resolve(__dirname, "public");
-var SRC_DIR = path.resolve(__dirname, "src");
+var SRC_DIR = path.resolve(__dirname, "client");
 
 module.exports = {
-    entry: __dirname + '/src',
+    entry: __dirname + '/client',
     output: {
         path: DEST_DIR,
         filename: "bundle.js",

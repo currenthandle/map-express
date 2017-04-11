@@ -31,6 +31,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build",
+    "dev": "nodemon server.js --ignore 'src/*'",
     "build": "webpack -d && cp src/client/index.html public/index.html"
   },
   "keywords": [],

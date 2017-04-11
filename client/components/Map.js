@@ -39,7 +39,7 @@ export default class MapContainer extends React.Component {
     handleClick(e) {
         console.log('in handler')
         fetch('/click')
-            .then(resp => resp.text())
+            .then(resp => resp.json())
             .then(text => console.log('~~~~~', text))
             .catch(err => console.err('!!!!!!!!!!', err))
     }
