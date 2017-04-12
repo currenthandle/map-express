@@ -31,7 +31,7 @@ export default class MapContainer extends React.Component {
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
 
-                <LayersControl position='topright'>
+                <LayersControl position='bottomright'>
                     { 
                         this.props.device.sessions && this.props.device.sessions.map((session, i) => {
                             return (

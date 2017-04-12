@@ -1,7 +1,8 @@
-
 import React, { Component } from 'react'
 
 import MapContainer from './Map'
+import DeviceControls from './DeviceControls'
+
 import { setDevice } from '../actions/device'
 
 import { connect } from 'react-redux'
