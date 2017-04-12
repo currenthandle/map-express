@@ -16,7 +16,10 @@ export default class App extends Component {
     }
     render() {
         return (
-            <MapContainer />	
+            <div>
+                <MapContainer />	
+                <DeviceControls />
+            </div>
         );
     }
 }
