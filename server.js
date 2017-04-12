@@ -33,7 +33,6 @@ let data = [];
 readFiles('raw-data/', function(filename, content) {
 	let waypointStrArr = content.split('\n')
     waypointStrArr.pop()
-    //console.log('wpst', waypointStrArr[waypointStrArr.length-1])
     let waypoints = []
 	waypointStrArr.forEach(waypointStr => {
         let waypointArr = waypointStr.split('	')
@@ -46,7 +45,6 @@ readFiles('raw-data/', function(filename, content) {
         waypoints.push(waypointObj)
 	})
     let splitName = filename.split('_')
-    //data[splitName[1]] = {    
     data.push({
         device_id: splitName[1],
         session_id: splitName[2].substr(0, splitName[2].indexOf('.')),
@@ -56,11 +54,8 @@ readFiles('raw-data/', function(filename, content) {
 }, function(err) {
 	throw err;
 });
-//console.log(data)
 
-//consolidateData(data)
 function consolidateData (data) {
-    //console.log(data.length)
     let devices = data
         .map(item => item['device_id'])
         .filter((el, i, arr) => arr.indexOf(el) === i)
@@ -68,11 +63,9 @@ function consolidateData (data) {
     return devices
         .map(device => data.filter(session => device === session['device_id']))
         .map(device => { 
-            //console.log('device', device)
             return {
                 device_id: device[0]['device_id'],
                 sessions: device.reduce((crt, nxt) => {
-                    //console.log('nxt', nxt)
                     return crt.concat([{
                         session_id: nxt['session_id'],
                         waypoints: nxt['waypoints']
@@ -82,14 +75,8 @@ function consolidateData (data) {
         })
 }
 
-/*
-setTimeout(() => {
-    data.forEach(d => console.log(d))
-}, 1000)
-*/
 app.get('/click', (req, res) => {
     let formatedData = consolidateData(data)
-    //formatedData[formatedData.length-1].sessions[2].waypoints.map(wp => console.log(wp))
     res.json(formatedData)
 })
 
