@@ -2,7 +2,7 @@
   "name": "socket",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
@@ -31,7 +31,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build",
-    "dev": "nodemon server.js --ignore 'src/*'",
+    "dev": "nodemon --ignore client/**",
     "build": "webpack -d && cp src/client/index.html public/index.html"
   },
   "keywords": [],

@@ -29,7 +29,7 @@ function readFiles(dirname, onFileContent, onError) {
 	});
 }
 
-let data = {};
+let data = [];
 readFiles('raw-data/', function(filename, content) {
 	let waypointStrArr = content.split('\n')
     let waypoints = []
@@ -45,19 +45,42 @@ readFiles('raw-data/', function(filename, content) {
         waypoints.push(waypointObj)
 	})
     let splitName = filename.split('_')
-    data[filename] = {
+    //data[splitName[1]] = {    
+    data.push({
         device_id: splitName[1],
         session_id: splitName[2].substr(0, splitName[2].indexOf('.')),
         waypoints: waypoints
-    }
+    })
 
 }, function(err) {
 	throw err;
 });
 
+function consolidateData (data) {
+    let devices = data
+        .map(item => item['device_id'])
+        .filter((el, i, arr) => arr.indexOf(el) === i)
+     
+    return devices
+        .map(device => data.filter(session => device === session['device_id']))
+        .map(device => { 
+            //console.log('device', device)
+            return {
+                device_id: device[0]['device_id'],
+                sessions: device.reduce((crt, nxt) => {
+                    //console.log('nxt', nxt)
+                    return crt.concat([{
+                        session_id: nxt['session_id'],
+                        waypoints: nxt['waypoints']
+                    }])
+                }, [])
+            }
+        })
+}
 
 app.get('/click', (req, res) => {
-    res.json(data)
+    let formatedData = consolidateData(data)
+    res.json(formatedData)
 })
 
 app.use(express.static(__dirname + '/public'))

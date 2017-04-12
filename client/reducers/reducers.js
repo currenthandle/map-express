@@ -1,14 +1,10 @@
 import { combineReducers } from 'redux'
 
-import signup from './signupReducer'
-import user from './user'
-import restaurant from './restaurant'
+import device from './device'
 
 // not doing anything right now
 export default combineReducers({
-    restaurant,
-    user,
-    signup
+    device,
 })
 
 

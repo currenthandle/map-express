@@ -35,13 +35,24 @@ const polys = [
     genPolyline(parsed3)
 ]
 
+import { connect } from 'react-redux'
+
+import { setDevice } from '../actions/device'
+
+@connect((state) => {
+    console.log('state', state)
+})
 export default class MapContainer extends React.Component {
     handleClick(e) {
         console.log('in handler')
         fetch('/click')
-            .then(resp => resp.json())
-            .then(text => console.log('~~~~~', text))
-            .catch(err => console.err('!!!!!!!!!!', err))
+            .then(resp => resp.text())
+            .then(text => console.log('~~~~~~~', text))
+            .catch(err => console.error('!!!!!!!!!!', err))
+    }
+    componentDidMount() {
+        this.props.dispatch(setDevice())
+
     }
     render() {
         return (
