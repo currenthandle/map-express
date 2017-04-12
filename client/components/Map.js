@@ -37,22 +37,22 @@ const polys = [
 
 import { connect } from 'react-redux'
 
-import { setDevice } from '../actions/device'
-
 @connect((state) => {
-    console.log('state', state)
+    return {
+        device: state.device.device
+    }
 })
 export default class MapContainer extends React.Component {
+    /*
     handleClick(e) {
-        console.log('in handler')
         fetch('/click')
             .then(resp => resp.text())
-            .then(text => console.log('~~~~~~~', text))
+            .then(text => console.log('~~~~~~~'))
             .catch(err => console.error('!!!!!!!!!!', err))
     }
-    componentDidMount() {
-        this.props.dispatch(setDevice())
-
+    */
+    componentWillMount() { 
+        console.log('MapContainer mounted') 
     }
     render() {
         return (
@@ -66,11 +66,12 @@ export default class MapContainer extends React.Component {
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
                 <LayersControl position='topright'>
+                    {console.log('#########this.props', this.props)}
                     { 
-                        polys.map((poly, i) => {
+                        this.props.device.sessions.map((session, i) => {
                             return (
                                 <Overlay name={String(i + 1)} key={i}>
-                                    <Polyline color='red' positions={poly} />
+                                    <Polyline color='red' positions={session.waypoints} />
                                 </Overlay>
                             )
                         })
