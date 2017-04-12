@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 
-import device from './device'
+import data from './data'
+//import changeDevice from './changeDevice'
 
 // not doing anything right now
 export default combineReducers({
-    device,
+    data,
+    //changeDevice
 })
 
 

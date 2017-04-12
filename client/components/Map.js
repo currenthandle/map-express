@@ -15,8 +15,10 @@ const { BaseLayer, Overlay } = LayersControl
 import { connect } from 'react-redux'
 
 @connect((state) => {
+    console.log('state', state)
     return {
-        device: state.device.device
+        data: state.data.data,
+        currentDevice: state.data.currentDevice
     }
 })
 export default class MapContainer extends React.Component {
@@ -32,8 +34,10 @@ export default class MapContainer extends React.Component {
                 />
 
                 <LayersControl position='bottomright'>
+                    { this.props.data && console.log('this.props.data', this.props.data, 'this.props.currentDevice', this.props.currentDevice, 'this.props.data[0]', this.props.data[0]) }
                     { 
-                        this.props.device.sessions && this.props.device.sessions.map((session, i) => {
+
+                        this.props.data && this.props.data[this.props.currentDevice].sessions.map((session, i) => {
                             return (
                                 <Overlay name={String(i + 1)} key={i}>
                                     <Polyline color='red' positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
