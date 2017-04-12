@@ -32,6 +32,8 @@ function readFiles(dirname, onFileContent, onError) {
 let data = [];
 readFiles('raw-data/', function(filename, content) {
 	let waypointStrArr = content.split('\n')
+    waypointStrArr.pop()
+    //console.log('wpst', waypointStrArr[waypointStrArr.length-1])
     let waypoints = []
 	waypointStrArr.forEach(waypointStr => {
         let waypointArr = waypointStr.split('	')
@@ -41,7 +43,6 @@ readFiles('raw-data/', function(filename, content) {
             lng: waypointArr[2],
             alt: waypointArr[3]
         }
-
         waypoints.push(waypointObj)
 	})
     let splitName = filename.split('_')
@@ -55,8 +56,11 @@ readFiles('raw-data/', function(filename, content) {
 }, function(err) {
 	throw err;
 });
+//console.log(data)
 
+//consolidateData(data)
 function consolidateData (data) {
+    //console.log(data.length)
     let devices = data
         .map(item => item['device_id'])
         .filter((el, i, arr) => arr.indexOf(el) === i)
@@ -78,8 +82,14 @@ function consolidateData (data) {
         })
 }
 
+/*
+setTimeout(() => {
+    data.forEach(d => console.log(d))
+}, 1000)
+*/
 app.get('/click', (req, res) => {
     let formatedData = consolidateData(data)
+    //formatedData[formatedData.length-1].sessions[2].waypoints.map(wp => console.log(wp))
     res.json(formatedData)
 })
 

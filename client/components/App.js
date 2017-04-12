@@ -14,7 +14,7 @@ import { connect } from 'react-redux'
 export default class App extends Component {
     componentWillMount() {
         //console.log('this.props', this.props)
-        console.log('dispatch setDevice')
+        //console.log('dispatch setDevice')
         this.props.dispatch(setDevice())
     }
     render() {

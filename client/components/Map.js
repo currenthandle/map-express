@@ -34,6 +34,7 @@ const polys = [
     genPolyline(parsed2),
     genPolyline(parsed3)
 ]
+console.log('polys', polys)
 
 import { connect } from 'react-redux'
 
@@ -43,16 +44,14 @@ import { connect } from 'react-redux'
     }
 })
 export default class MapContainer extends React.Component {
-    /*
     handleClick(e) {
         fetch('/click')
             .then(resp => resp.text())
             .then(text => console.log('~~~~~~~'))
             .catch(err => console.error('!!!!!!!!!!', err))
     }
-    */
     componentWillMount() { 
-        console.log('MapContainer mounted') 
+        //console.log('MapContainer mounted') 
     }
     render() {
         return (
@@ -65,19 +64,18 @@ export default class MapContainer extends React.Component {
                   attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
+
                 <LayersControl position='topright'>
-                    {console.log('#########this.props', this.props)}
                     { 
-                        this.props.device.sessions.map((session, i) => {
+                        this.props.device.sessions && this.props.device.sessions.map((session, i) => {
                             return (
                                 <Overlay name={String(i + 1)} key={i}>
-                                    <Polyline color='red' positions={session.waypoints} />
+                                    <Polyline color='red' positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
                                 </Overlay>
                             )
                         })
                     }
                 </LayersControl>
-                {/*
                 <LayersControl position='topright'>
                     { 
                         polys.map((poly, i) => {
@@ -89,7 +87,6 @@ export default class MapContainer extends React.Component {
                         })
                     }
                 </LayersControl>
-                */}
             </Map>
         )
     }
