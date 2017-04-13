@@ -7,7 +7,8 @@ import { changeDevice } from '../actions/changeDevice'
 @connect((state) => {
     return {
         currentDevice: state.data.currentDevice,
-        numDevices: state.data.numDevices
+        numDevices: state.data.numDevices,
+        data: state.data.data,
     }
 })
 export default class DeviceControls extends React.Component {
@@ -18,7 +19,9 @@ export default class DeviceControls extends React.Component {
                     className='back'
                     onClick={this.handleClick.bind(this)}
                 >Back</button>
-                <div>Title</div>
+                { console.log( this.props, '********')    }
+        
+                <div>{ this.props.data && this.props.data[this.props.currentDevice]['device_id'] }</div>
                 <button 
                     className='forward'
                     onClick={this.handleClick.bind(this)}
@@ -29,7 +32,6 @@ export default class DeviceControls extends React.Component {
     handleClick(e) {
         e.preventDefault()
         if (e.target.className === 'back'){
-            console.log('back')
             this.props.dispatch(changeDevice(this.props.currentDevice, 'back', this.props.numDevices))
         } else {
             this.props.dispatch(changeDevice(this.props.currentDevice, 'forward', this.props.numDevices))
