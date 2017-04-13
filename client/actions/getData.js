@@ -4,14 +4,18 @@ export function getData(data) {
         payload: fetch('/click')
             .then(resp => resp.json())
             .then(data => data
-                .map(device => device.sessions
-                    .map(session => {
-                        return {
-                            ...session,
-                            active: false
-                        } 
-                    })
-                )
+                .map(device => { 
+                    return { 
+                        ...device,
+                        sessions: device.sessions
+                            .map(session => {
+                                return {
+                                    ...session,
+                                    active: false
+                                } 
+                            })
+                    }
+                })
             )
             .catch(err => console.error(err))
     }

@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 
 @connect(state => {
     return {
-        data: state.data.data
+        data: state.data.data,
+        currentDevice: state.data.currentDevice
     }
 })
 export default class CustomControl extends React.Component {
@@ -34,7 +35,10 @@ export default class CustomControl extends React.Component {
                                 borderRadius: '1rem'
                             }}
                         >Back</button>
-                        <div>Device ID</div>
+                        { console.log('props', this.props) }
+                        { console.log('props', this.props.data[this.props.currentDevice]) }
+
+                        <div>{ this.props.data[this.props.currentDevice]['device_id']}</div>
                         <button
                             style={{ 
                                 width: '5rem',
