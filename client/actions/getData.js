@@ -3,15 +3,16 @@ export function getData(data) {
         type: 'GET_DATA',
         payload: fetch('/click')
             .then(resp => resp.json())
-            .then(data =>  data )
+            .then(data => data
+                .map(device => device.sessions
+                    .map(session => {
+                        return {
+                            ...session,
+                            active: false
+                        } 
+                    })
+                )
+            )
             .catch(err => console.error(err))
     }
 }
-/*
-export function setDevice(crt, direction) {
-    return {
-        type: 'SET_DEVICE',
-        payload: 
-    }
-}
-*/

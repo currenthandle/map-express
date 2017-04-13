@@ -1,34 +1,90 @@
 import React from 'react'
 import Control from 'react-leaflet-control'
 
+import { connect } from 'react-redux'
+
+@connect(state => {
+    return {
+        data: state.data.data
+    }
+})
 export default class CustomControl extends React.Component {
     render() {
        return (
             <Control position="topright">
                 <div
                     style={{
-                        backgroundColor: 'black',
+                        backgroundColor: 'white',
+                        //backgroundColor: 'black',
                         padding: '5px',
                     }}
                 >
-                    <div style={{ marginLeft: '37px' }}>
-                        <button onClick={this.handleUpPanClick}>
-                            Pan up
-                        </button>
+                    <div 
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        { console.log('#############',this.props) }
+                        <button
+                            style={{ 
+                                width: '5rem',
+                                marginRight: '1rem',
+                                border: 'none',
+                                borderRadius: '1rem'
+                            }}
+                        >Back</button>
+                        <div>Device ID</div>
+                        <button
+                            style={{ 
+                                width: '5rem',
+                                marginLeft: '1rem',
+                                border: 'none',
+                                borderRadius: '1rem'
+                            }}
+                        >Forward</button>
                     </div>
-                    <div>
-                        <button onClick={this.handleLeftPanClick}>
-                            Pan left
-                        </button>
-                        <button onClick={this.handleRightPanClick}>
-                            Pan right
-                        </button>
-                    </div>
-                    <div style={{ marginLeft: '30px' }}>
-                        <button onClick={this.handleDownPanClick}>
-                            Pan down
-                        </button>
-                    </div>
+                    <ul style={{
+                        padding: 0,
+                        textAlign: 'left'
+                    }}>
+                        <li
+                            style= {{
+                                listStyle: 'none'
+                            }}
+                        >
+                            <input 
+                                type='checkbox'
+                            />
+                            <span>Session 1</span>
+                        </li>
+                        <li
+                            style= {{
+                                listStyle: 'none'
+                            }}
+                        >
+                            <input 
+                                type='checkbox'
+                            />
+                            <span>Session 2</span>
+                        </li>
+                        <li
+                            style= {{
+                                listStyle: 'none'
+                            }}
+                        >
+                            <input type='checkbox'/>
+                            <span>Session 3</span>
+                        </li>
+                        <li
+                            style= {{
+                                listStyle: 'none'
+                            }}
+                        >
+                            <input type='checkbox'/>
+                            <span>Session 5</span>
+                        </li>
+                    </ul>
                 </div>
             </Control>
         )
