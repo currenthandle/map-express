@@ -8,7 +8,8 @@ export default function reducer(state = {
                 data: action.payload, 
                 //device: action.payload[0],
                 numDevices: action.payload.length,
-                currentDevice: 0
+                currentDevice: 0,
+                activeSessions: []
             }
         case 'CHANGE_DEVICE': 
             let crt = action.payload.crt
@@ -33,6 +34,11 @@ export default function reducer(state = {
                 ...state, 
                 currentDevice: crt 
             }
+        case 'TOGGLE_SESSSION':
+            let sessionId = action.payload.sessionId,
+                activeSessions = action.payload.activeSessions
+
+
 		
         default: 
             return state
