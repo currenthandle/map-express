@@ -32,7 +32,9 @@ export default class MapContainer extends React.Component {
                   attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
-                <CustomControl />
+                {
+                    this.props.data && this.props.data.map( device => <CustomControl device={device} />)
+                }
                 {/*
 
                 <LayersControl position='bottomright'>
