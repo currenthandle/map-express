@@ -18,7 +18,7 @@ export default class App extends Component {
         return (
             <div style={{ height: '100%' }}>
                 <MapContainer />	
-                <DeviceControls />
+                {/*<DeviceControls /> */}
             </div>
         );
     }

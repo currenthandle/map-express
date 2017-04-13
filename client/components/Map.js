@@ -12,6 +12,7 @@ import {
 
 const { BaseLayer, Overlay } = LayersControl
 
+import CustomControl from './CustomControl'
 import { connect } from 'react-redux'
 
 @connect((state) => {
@@ -31,6 +32,8 @@ export default class MapContainer extends React.Component {
                   attribution='&copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
+                <CustomControl />
+                {/*
 
                 <LayersControl position='bottomright'>
                     { 
@@ -44,6 +47,7 @@ export default class MapContainer extends React.Component {
                         })
                     }
                 </LayersControl>
+                */}
             </Map>
         )
     }
