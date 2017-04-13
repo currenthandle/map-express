@@ -45,9 +45,10 @@ readFiles('raw-data/', function(filename, content) {
         waypoints.push(waypointObj)
 	})
     let splitName = filename.split('_')
+    console.log('splitName', splitName)
     data.push({
         device_id: splitName[0],
-        session_id: splitName[1].substr(0, splitName[2].indexOf('.')),
+        session_id: splitName[1].substr(0, splitName[1].indexOf('.')),
         waypoints: waypoints
     })
 
