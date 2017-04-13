@@ -35,10 +35,8 @@ export default class CustomControl extends React.Component {
                                 borderRadius: '1rem'
                             }}
                         >Back</button>
-                        { console.log('props', this.props) }
-                        { console.log('props', this.props.data[this.props.currentDevice]) }
 
-                        <div>{ this.props.data[this.props.currentDevice]['device_id']}</div>
+                        <div>{ this.props.data && this.props.data[this.props.currentDevice]['device_id']}</div>
                         <button
                             style={{ 
                                 width: '5rem',
@@ -52,42 +50,23 @@ export default class CustomControl extends React.Component {
                         padding: 0,
                         textAlign: 'left'
                     }}>
-                        <li
-                            style= {{
-                                listStyle: 'none'
-                            }}
-                        >
-                            <input 
-                                type='checkbox'
-                            />
-                            <span>Session 1</span>
-                        </li>
-                        <li
-                            style= {{
-                                listStyle: 'none'
-                            }}
-                        >
-                            <input 
-                                type='checkbox'
-                            />
-                            <span>Session 2</span>
-                        </li>
-                        <li
-                            style= {{
-                                listStyle: 'none'
-                            }}
-                        >
-                            <input type='checkbox'/>
-                            <span>Session 3</span>
-                        </li>
-                        <li
-                            style= {{
-                                listStyle: 'none'
-                            }}
-                        >
-                            <input type='checkbox'/>
-                            <span>Session 5</span>
-                        </li>
+                        {
+                            this.props.data && this.props.data[this.props.currentDevice].sessions.map((session, i) => {
+                                return (
+                                    <li
+                                        key={i}
+                                        style= {{
+                                            listStyle: 'none'
+                                        }}
+                                    >
+                                        <input 
+                                            type='checkbox'
+                                        />
+                                        <span>{ String(new Date(1000 * Number(session['session_id']))) }</span>
+                                    </li>
+                                )
+                            }) 
+                        }
                     </ul>
                 </div>
             </Control>
