@@ -14,17 +14,42 @@ import { changeDevice } from '../actions/changeDevice'
 export default class DeviceControls extends React.Component {
     render() {
         return (
-            <div>
+            <div
+                style= {{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    marginTop: '2.2rem',
+                }}
+            > 
                 <button 
                     className='back'
                     onClick={this.handleClick.bind(this)}
+                    style= {{
+                        flex: '0 1 auto',
+                        marginRight: '3rem',
+                        width: '5rem',
+                        borderRadius: '1rem',
+                        border: 'none'
+
+                    }}
                 >Back</button>
-                { console.log( this.props, '********')    }
-        
-                <div>{ this.props.data && this.props.data[this.props.currentDevice]['device_id'] }</div>
+                <div
+                    style= {{
+                        fontSize: '2rem',
+                        flex: '0 1 auto',
+                    }}
+                >{ this.props.data && this.props.data[this.props.currentDevice]['device_id'] }</div>
                 <button 
                     className='forward'
                     onClick={this.handleClick.bind(this)}
+                    style= {{
+                        flex: '0 1 auto',
+                        borderRadius: '1rem',
+                        width: '5rem',
+                        marginLeft: '3rem',
+                        border: 'none'
+                            
+                    }}
                 >Forward</button>
             </div>
         ) 
