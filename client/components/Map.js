@@ -37,8 +37,10 @@ export default class MapContainer extends React.Component {
                         return device.sessions.filter(session => {
                             return session.active
                         }).map(session => {
+                            console.log('#' + session['session_id'].substr(session['session_id'].length-6) +'&&&&&&&&&&&')
+                            console.log('#' + session['session_id'].substr(session['session_id'].length-6) +'&&&&&&&&&&&')
                             return (
-                                <Polyline color='red' positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
+                                <Polyline color={ '#' + session['session_id'].substr(session['session_id'].length-6) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
                             )
                         })
                     })
