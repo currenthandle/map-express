@@ -3,6 +3,13 @@ import Control from 'react-leaflet-control'
 
 import { connect } from 'react-redux'
 
+import { toggleTrajectory } from '../actions/toggleTrajectory'
+
+@connect((state) => {
+    return {
+        data: state.data.data
+    }
+})
 export default class CustomControl extends React.Component {
     state = {
         open: false
@@ -45,11 +52,16 @@ export default class CustomControl extends React.Component {
                                             style= {{
                                                 listStyle: 'none'
                                             }}
+                                            onClick={ this.handleCheck.bind(this) }
+                                            data-session = {session['session_id']}
+                                            data-device= {this.props.device['device_id']}
                                         >
                                             <input 
                                                 type='checkbox'
+                                                className='checkbox'
                                                 onChange={ this.handleCheck }
                                                 id={session['session_id']}
+                                                checked={ session.active }
                                             />
                                             { console.log('session', session) }
                                             <span>{ String(new Date(1000 * Number(session['session_id']))) }</span>
@@ -64,7 +76,15 @@ export default class CustomControl extends React.Component {
         )
     }
     handleCheck(e){
-        console.log(e.currentTarget)
+        let li  = e.currentTarget,
+            checkbox = li.querySelector('.checkbox')
+
+        checkbox.checked = !checkbox.checked
+        let session = li.dataset.session,
+        device = li.dataset.device
+        this.props.dispatch(toggleTrajectory(session, device, this.props.data))
+
+
     }
     handleOpen(e) {
         e.preventDefault()

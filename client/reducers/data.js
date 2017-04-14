@@ -34,11 +34,28 @@ export default function reducer(state = {
                 ...state, 
                 currentDevice: crt 
             }
-        case 'TOGGLE_SESSSION':
-            let sessionId = action.payload.sessionId,
-                activeSessions = action.payload.activeSessions
+        case 'TOGGLE_TRAJECTORY':
+            let ap = action.payload,
+                data = ap.data,
+                deviceId = ap.device,
+                sessionId = ap.session
 
-
+            console.log(data, 'data')
+            return {
+                ...state,
+                data: data.map(device => {
+                    if (device['device_id'] === deviceId) {
+                        device.sessions.map(session => {
+                            if (session['session_id'] === sessionId) {
+                                session.active = !session.active
+                                return session
+                            }
+                            return session
+                        })
+                    }
+                    return device
+                })
+            }
 		
         default: 
             return state

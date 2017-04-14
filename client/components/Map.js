@@ -33,6 +33,17 @@ export default class MapContainer extends React.Component {
                   url='http://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
                 {
+                    this.props.data && this.props.data.map( device => {
+                        return device.sessions.filter(session => {
+                            return session.active
+                        }).map(session => {
+                            return (
+                                <Polyline color='red' positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
+                            )
+                        })
+                    })
+                }
+                {
                     this.props.data && this.props.data.map( device => <CustomControl device={device} />)
                 }
                 {/*
