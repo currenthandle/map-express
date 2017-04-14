@@ -57,7 +57,7 @@ export default class MapContainer extends React.Component {
                             return session.active
                         }).map(session => {
                             return (
-                                <Polyline color={ intToRGB(hashCode(session['session_id'])) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
+                                <Polyline weight={4} color={ intToRGB(hashCode(session['session_id'])) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
                             )
                         })
                     })

@@ -25,7 +25,8 @@ export default class CustomControl extends React.Component {
                         textAlign: 'center',
                         width: '18rem',
                         borderRadius: '.3rem',
-                        padding: '.5rem'
+                        padding: '.5rem',
+                        border: '1px grey solid'
 
                     }}
                 >
