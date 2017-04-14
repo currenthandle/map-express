@@ -46,7 +46,7 @@ export default class MapContainer extends React.Component {
                     })
                 }
                 {
-                    this.props.data && this.props.data.map( device => <CustomControl device={device} />)
+                    this.props.data && this.props.data.map( (device, i)  => <CustomControl device={device} key={i} />)
                 }
                 {/*
 
