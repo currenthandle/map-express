@@ -42,6 +42,7 @@ export default class CustomControl extends React.Component {
                     </div>
                    {
                        this.state.open && <ul style={{
+                            textAlign: 'center',
                             padding: 0,
                             textAlign: 'left'
                         }}>
@@ -51,7 +52,7 @@ export default class CustomControl extends React.Component {
                                         <li
                                             key={i}
                                             style= {{
-                                                listStyle: 'none'
+                                                listStyle: 'none',
                                             }}
                                             onClick={ this.handleCheck.bind(this) }
                                             data-session = {session['session_id']}
@@ -63,8 +64,11 @@ export default class CustomControl extends React.Component {
                                                 onChange={ this.handleCheck }
                                                 id={session['session_id']}
                                                 checked={ session.active }
+                                                style= {{
+                                                    verticalAlign: 'middle'
+                                                }}
                                             />
-                                            <span>{ String(new Date(1000 * Number(session['session_id']))) }</span>
+                                            <span style={{ verticalAlign: 'middle' }}> { String(new Date(1000 * Number(session['session_id']))) }</span>
                                         </li>
                                     )
                                 }) 
