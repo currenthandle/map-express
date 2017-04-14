@@ -23,10 +23,12 @@ export default class CustomControl extends React.Component {
                         //backgroundColor: 'black',
                         padding: '5px',
                         textAlign: 'center',
-                        width: '26rem'
+                        width: '20rem'
                     }}
                 >
-                    <div>
+                    <div 
+                        onClick={ this.handleOpen.bind(this) }
+                    >
                         <div
                             style={{
                                 display: 'inline-block'
@@ -36,7 +38,6 @@ export default class CustomControl extends React.Component {
                             style={{
                                 float: 'right'
                             }}    
-                            onClick={ this.handleOpen.bind(this) }
                         >X</button>
                     </div>
                    {
@@ -63,7 +64,6 @@ export default class CustomControl extends React.Component {
                                                 id={session['session_id']}
                                                 checked={ session.active }
                                             />
-                                            { console.log('session', session) }
                                             <span>{ String(new Date(1000 * Number(session['session_id']))) }</span>
                                         </li>
                                     )

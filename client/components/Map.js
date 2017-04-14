@@ -37,8 +37,6 @@ export default class MapContainer extends React.Component {
                         return device.sessions.filter(session => {
                             return session.active
                         }).map(session => {
-                            console.log('#' + session['session_id'].substr(session['session_id'].length-6) +'&&&&&&&&&&&')
-                            console.log('#' + session['session_id'].substr(session['session_id'].length-6) +'&&&&&&&&&&&')
                             return (
                                 <Polyline color={ '#' + session['session_id'].substr(session['session_id'].length-6) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
                             )
@@ -48,21 +46,6 @@ export default class MapContainer extends React.Component {
                 {
                     this.props.data && this.props.data.map( (device, i)  => <CustomControl device={device} key={i} />)
                 }
-                {/*
-
-                <LayersControl position='bottomright'>
-                    { 
-
-                        this.props.data && this.props.data[this.props.currentDevice].sessions.map((session, i) => {
-                            return (
-                                <Overlay name={String(new Date(1000 * Number(session['session_id'])))} key={i}>
-                                    <Polyline color='red' positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
-                                </Overlay>
-                            )
-                        })
-                    }
-                </LayersControl>
-                */}
             </Map>
         )
     }
