@@ -17,6 +17,23 @@ import Logo from './Logo'
 
 import { connect } from 'react-redux'
 
+function hashCode(str) { // java String#hashCode
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+console.log(hash, 'hash')
+    return hash;
+} 
+
+function intToRGB(i){
+    var c = (i & 0x00FFFFFF)
+        .toString(16)
+        .toUpperCase();
+
+    return '#' + "00000".substring(0, 6 - c.length) + c;
+}
+
 @connect((state) => {
     return {
         data: state.data.data,
@@ -40,7 +57,7 @@ export default class MapContainer extends React.Component {
                             return session.active
                         }).map(session => {
                             return (
-                                <Polyline color={ '#' + session['session_id'].substr(session['session_id'].length-6) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
+                                <Polyline color={ intToRGB(hashCode(session['session_id'])) } positions={session.waypoints.map(waypoint => [ waypoint.lat, waypoint.lng ])} />
                             )
                         })
                     })
