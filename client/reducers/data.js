@@ -40,7 +40,6 @@ export default function reducer(state = {
                 deviceId = ap.device,
                 sessionId = ap.session
 
-            console.log(data, 'data')
             return {
                 ...state,
                 data: data.map(device => {

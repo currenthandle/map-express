@@ -13,6 +13,8 @@ import {
 const { BaseLayer, Overlay } = LayersControl
 
 import CustomControl from './CustomControl'
+import Logo from './Logo'
+
 import { connect } from 'react-redux'
 
 @connect((state) => {
@@ -46,6 +48,7 @@ export default class MapContainer extends React.Component {
                 {
                     this.props.data && this.props.data.map( (device, i)  => <CustomControl device={device} key={i} />)
                 }
+                {/* <Logo/> */}
             </Map>
         )
     }
